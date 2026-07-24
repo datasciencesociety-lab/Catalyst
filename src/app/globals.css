@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --color-brand-blue: #0A44A4;
+  --color-brand-blue-hover: #073480;
+  --color-brand-blue-light: #EBF2FE;
+  --color-base-bg: #F7F7F4;
+  --color-card-bg: #ffffff;
+  --color-border-subtle: #E5E5E0;
+}
+
+:root {
+  --background: #F7F7F4;
+  --foreground: #1A1A1A;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Custom CSS for Paper texture and Blueprint elements */
+.bg-paper {
+  background-color: #F7F7F4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+.bg-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(10, 68, 164, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 68, 164, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-blueprint-grid-fine {
+  background-image: 
+    linear-gradient(to right, rgba(10, 68, 164, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 68, 164, 0.02) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.bg-blueprint-dot {
+  background-image: radial-gradient(rgba(10, 68, 164, 0.06) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.shimmer-animation {
+  background: linear-gradient(
+    90deg,
+    rgba(10, 68, 164, 0.05) 25%,
+    rgba(10, 68, 164, 0.15) 50%,
+    rgba(10, 68, 164, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F7F4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D5D5D0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #AFAFA8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
