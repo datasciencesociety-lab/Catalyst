@@ -20,7 +20,7 @@ const teamMembers = [
     color: "from-blue-500/10 to-cyan-500/10",
     textColor: "text-blue-700",
     linkedin: "#",
-    email: "aravind@dss.in",
+    email: "cmritdatasciencesociety@gmail.com",
   },
   {
     name: "Neha Kulkarni",
@@ -29,7 +29,7 @@ const teamMembers = [
     color: "from-indigo-500/10 to-purple-500/10",
     textColor: "text-indigo-700",
     linkedin: "#",
-    email: "neha@dss.in",
+    email: "cmritdatasciencesociety@gmail.com",
   },
   {
     name: "Rohan Sen",
@@ -38,7 +38,7 @@ const teamMembers = [
     color: "from-cyan-500/10 to-emerald-500/10",
     textColor: "text-cyan-700",
     linkedin: "#",
-    email: "rohan@dss.in",
+    email: "cmritdatasciencesociety@gmail.com",
   },
   {
     name: "Tanvi Gupta",
@@ -47,7 +47,7 @@ const teamMembers = [
     color: "from-pink-500/10 to-rose-500/10",
     textColor: "text-pink-700",
     linkedin: "#",
-    email: "tanvi@dss.in",
+    email: "cmritdatasciencesociety@gmail.com",
   },
 ];
 

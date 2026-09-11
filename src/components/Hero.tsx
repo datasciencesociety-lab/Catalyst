@@ -138,7 +138,7 @@ export default function Hero() {
               Register for Catalyst
             </a>
             <a
-              href="#sponsors"
+              href="mailto:cmritdatasciencesociety@gmail.com"
               className="flex-1 sm:flex-initial inline-flex items-center justify-center px-8 py-3.5 text-xs font-mono font-medium text-zinc-700 bg-white border border-zinc-200 rounded-md hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-300 hover:-translate-y-0.5 active:scale-98"
             >
               Become a Sponsor

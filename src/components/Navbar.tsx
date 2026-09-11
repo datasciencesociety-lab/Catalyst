@@ -74,7 +74,7 @@ export default function Navbar() {
           {/* Action Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="#sponsors"
+              href="mailto:cmritdatasciencesociety@gmail.com"
               className="text-xs font-mono font-medium text-zinc-600 hover:text-brand-blue px-4 py-2 transition-colors"
             >
               Become Sponsor
@@ -138,7 +138,7 @@ export default function Navbar() {
                 Register Now
               </a>
               <a
-                href="#sponsors"
+                href="mailto:cmritdatasciencesociety@gmail.com"
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full py-3.5 text-center text-sm font-mono font-medium text-zinc-600 border border-zinc-200 rounded-md hover:bg-zinc-50"
               >

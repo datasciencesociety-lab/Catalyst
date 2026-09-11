@@ -60,7 +60,7 @@ export default function Sponsors() {
           </div>
 
           <a
-            href="mailto:sponsor@catalysthack.in"
+            href="mailto:cmritdatasciencesociety@gmail.com"
             className="inline-flex items-center gap-2 px-6 py-3 text-xs font-mono font-medium text-white bg-brand-blue rounded-md hover:bg-brand-blue-hover transition-all shadow-sm hover:shadow-[0_4px_12px_rgba(10,68,164,0.15)] group whitespace-nowrap"
           >
             Become a Sponsor

@@ -103,7 +103,7 @@ export default function Footer() {
                   <a href="#" className="text-xs text-zinc-500 hover:text-brand-blue transition-colors font-sans">Terms of Service</a>
                 </li>
                 <li>
-                  <a href="mailto:contact@dss.in" className="text-xs text-zinc-500 hover:text-brand-blue transition-colors font-sans">Contact DSS</a>
+                  <a href="mailto:cmritdatasciencesociety@gmail.com" className="text-xs text-zinc-500 hover:text-brand-blue transition-colors font-sans">Contact DSS</a>
                 </li>
               </ul>
             </div>
