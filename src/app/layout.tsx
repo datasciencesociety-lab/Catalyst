@@ -59,12 +59,21 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "CATALYST '26",
     locale: "en_IN",
+    images: [
+      {
+        url: "/image.png",
+        width: 1432,
+        height: 721,
+        alt: "CATALYST '26 — National 24-Hour Hackathon | DSS",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "CATALYST '26 — National 24-Hour Hackathon | DSS",
     description:
       "A national 24-hour hackathon by DSS where builders turn real-world problems into working solutions.",
+    images: ["/image.png"],
   },
 };
 
