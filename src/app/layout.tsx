@@ -17,35 +17,54 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CATALYST '26 — Data Science Society",
+  metadataBase: new URL("https://catalyst26.vercel.app/"),
+  title: "CATALYST '26 — National 24-Hour Hackathon | DSS",
   description:
-    "CATALYST '26 is a national 24-hour student hackathon organized by Data Science Society (DSS) on October 9–10, 2026 at CMR Institute of Technology (CMRIT), Hyderabad. Where ideas meet action.",
+    "CATALYST '26 is a national 24-hour hackathon by Data Science Society (DSS), happening October 9–10, 2026 at CMRIT, Hyderabad. Build solutions for real-world problems across AI, Healthcare, FinTech, Education and Open Innovation.",
+  alternates: {
+    canonical: "https://catalyst26.vercel.app/",
+  },
   keywords: [
-    "Catalyst 2026",
-    "Catalyst Hackathon",
-    "Data Science Society",
-    "DSS",
-    "Hackathon India",
-    "Premium Hackathon",
-    "Student Hackathon",
-    "CMRIT Hyderabad",
-    "AI Hackathon",
-    "National Hackathon",
-    "Design Hackathon",
+    "Catalyst 26 hackathon",
+    "Catalyst 2026 hackathon",
+    "DSS Catalyst",
+    "Data Science Society hackathon",
+    "hackathon Hyderabad 2026",
+    "24 hour hackathon Hyderabad",
+    "student hackathon Hyderabad",
+    "CMRIT hackathon",
+    "AI hackathon Hyderabad",
+    "FinTech hackathon Hyderabad",
+    "Healthcare hackathon",
+    "Education hackathon",
+    "Open Innovation hackathon",
   ],
   authors: [{ name: "Data Science Society" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "CATALYST '26 — Data Science Society",
+    title: "CATALYST '26 — National 24-Hour Hackathon | DSS",
     description:
-      "A national 24-hour student hackathon organized by Data Science Society (DSS) on October 9–10, 2026 at CMRIT, Hyderabad. Build what matters.",
+      "A national 24-hour hackathon by DSS where builders turn real-world problems into working solutions.",
+    url: "https://catalyst26.vercel.app/",
     type: "website",
+    siteName: "CATALYST '26",
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CATALYST '26 — Data Science Society",
+    title: "CATALYST '26 — National 24-Hour Hackathon | DSS",
     description:
-      "A national 24-hour student hackathon organized by Data Science Society (DSS) on October 9–10, 2026 at CMRIT, Hyderabad.",
+      "A national 24-hour hackathon by DSS where builders turn real-world problems into working solutions.",
   },
 };
 
