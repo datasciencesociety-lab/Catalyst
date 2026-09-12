@@ -68,6 +68,57 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://catalyst26.vercel.app/#website",
+      "url": "https://catalyst26.vercel.app/",
+      "name": "CATALYST '26",
+      "description":
+        "CATALYST '26 is a national 24-hour hackathon by Data Science Society (DSS), happening October 9–10, 2026 at CMRIT, Hyderabad. Build solutions for real-world problems across AI, Healthcare, FinTech, Education and Open Innovation.",
+      "publisher": {
+        "@id": "https://catalyst26.vercel.app/#organization",
+      },
+      "inLanguage": "en-IN",
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://catalyst26.vercel.app/#organization",
+      "name": "Data Science Society",
+      "alternateName": "DSS",
+      "url": "https://catalyst26.vercel.app/",
+      "email": "cmritdatasciencesociety@gmail.com",
+    },
+    {
+      "@type": "Event",
+      "@id": "https://catalyst26.vercel.app/#event",
+      "name": "CATALYST '26",
+      "description":
+        "A national 24-hour hackathon by Data Science Society (DSS) where builders turn real-world problems into working solutions.",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-10",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "CMR Institute of Technology (CMRIT)",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Hyderabad",
+          "addressRegion": "Telangana",
+          "addressCountry": "IN",
+        },
+      },
+      "organizer": {
+        "@id": "https://catalyst26.vercel.app/#organization",
+      },
+      "url": "https://catalyst26.vercel.app/",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -79,6 +130,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-paper selection:bg-brand-blue selection:text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>
