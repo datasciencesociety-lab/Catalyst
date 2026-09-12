@@ -53,23 +53,29 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-32 relative overflow-hidden bg-base-bg border-b border-border-subtle/50">
+    <section
+      id="team"
+      className="py-28 md:py-36 lg:py-40 relative overflow-hidden bg-paper border-b border-border-subtle/60"
+    >
+      {/* Blueprint Grid & Dot Overlays */}
       <div className="absolute inset-0 bg-blueprint-dot opacity-40 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-blueprint-grid opacity-20 z-0 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
         {/* Section Header */}
-        <div className="mb-20 max-w-3xl">
-          <div className="font-mono text-xs font-semibold text-brand-blue uppercase tracking-widest mb-3">
-            08 // ORGANIZING TEAM
+        <div className="mb-16 md:mb-20 max-w-3xl">
+          <div className="inline-flex items-center gap-2 mb-5 md:mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+            <span className="font-mono text-xs md:text-sm font-semibold text-brand-blue tracking-[0.22em] uppercase">
+              ORGANIZING TEAM
+            </span>
           </div>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-zinc-900 tracking-tight leading-tight">
-            Data Science Society Leads
+          <h2 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-[-0.035em] text-foreground leading-[0.92] uppercase mb-6 sm:mb-8">
+            DATA SCIENCE SOCIETY LEADS
           </h2>
-          <p className="text-zinc-500 text-sm mt-4 font-sans max-w-xl">
-            The group of developers, researchers, and designers staging Catalyst '26.
+          <p className="text-zinc-600 text-base sm:text-lg md:text-xl leading-relaxed font-sans max-w-2xl">
+            The group of developers, researchers, and designers staging Catalyst &apos;26.
           </p>
-          <div className="w-16 h-[2px] bg-brand-blue mt-6" />
         </div>
 
         {/* Team Grid */}

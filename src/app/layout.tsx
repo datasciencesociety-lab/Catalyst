@@ -17,8 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CATALYST '26 | National 24-Hour Student Hackathon by DSS",
-  description: "Organized by Data Science Society. A national 24-hour premium hackathon bringing developers, designers, and builders together to solve real-world problems with AI, Healthcare, and Data Science.",
+  title: "CATALYST '26 — Data Science Society",
+  description:
+    "CATALYST '26 is a national 24-hour student hackathon organized by Data Science Society (DSS) on October 9–10, 2026 at CMR Institute of Technology (CMRIT), Hyderabad. Where ideas meet action.",
   keywords: [
     "Catalyst 2026",
     "Catalyst Hackathon",
@@ -27,22 +28,25 @@ export const metadata: Metadata = {
     "Hackathon India",
     "Premium Hackathon",
     "Student Hackathon",
+    "CMRIT Hyderabad",
     "AI Hackathon",
-    "India Hackathon",
-    "Design Hackathon"
+    "National Hackathon",
+    "Design Hackathon",
   ],
   authors: [{ name: "Data Science Society" }],
   openGraph: {
-    title: "CATALYST '26 | National 24-Hour Student Hackathon by DSS",
-    description: "Where Ideas Meet Action. Join India's most premium student hackathon organized by Data Science Society.",
+    title: "CATALYST '26 — Data Science Society",
+    description:
+      "A national 24-hour student hackathon organized by Data Science Society (DSS) on October 9–10, 2026 at CMRIT, Hyderabad. Build what matters.",
     type: "website",
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CATALYST '26 | National 24-Hour Student Hackathon by DSS",
-    description: "Join India's most premium student hackathon organized by Data Science Society.",
-  }
+    title: "CATALYST '26 — Data Science Society",
+    description:
+      "A national 24-hour student hackathon organized by Data Science Society (DSS) on October 9–10, 2026 at CMRIT, Hyderabad.",
+  },
 };
 
 export default function RootLayout({

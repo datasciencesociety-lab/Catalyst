@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Clock, ArrowUpRight } from "lucide-react";
+
+// Official CATALYST '26 registration URL on Unstop (update when portal goes live)
+const UNSTOP_REGISTRATION_URL = "#register";
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({
@@ -11,12 +13,13 @@ export default function Hero() {
     minutes: 0,
     seconds: 0,
   });
+  const [isLive, setIsLive] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    // Set target date: September 25, 2026 at 09:00:00 AM IST
-    const targetDate = new Date("2026-09-25T09:00:00+05:30").getTime();
+    // Official Event Start: October 9, 2026 at 09:00:00 AM IST
+    const targetDate = new Date("2026-10-09T09:00:00+05:30").getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -29,8 +32,10 @@ export default function Hero() {
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((difference % (1000 * 60)) / 1000),
         });
+        setIsLive(false);
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsLive(true);
       }
     };
 
@@ -44,213 +49,202 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
         delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 14 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+      transition: {
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      },
     },
   };
 
   return (
-    <section className="relative min-h-[95vh] flex flex-col justify-center pt-28 pb-16 overflow-hidden border-b border-border-subtle/50">
+    <section className="relative min-h-[95vh] flex flex-col justify-center pt-32 sm:pt-36 md:pt-44 pb-20 md:pb-28 overflow-hidden border-b border-border-subtle/60">
       {/* Blueprint Grid Lines & Overlay */}
-      <div className="absolute inset-0 bg-blueprint-dot opacity-60 z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-blueprint-grid opacity-30 z-0 pointer-events-none" />
-      
-      {/* Structural blueprint frames */}
-      <div className="absolute top-24 left-6 right-6 bottom-8 border border-brand-blue/5 rounded-lg pointer-events-none z-0 hidden md:block">
-        {/* Outer frame annotations */}
-        <div className="absolute -top-3 left-4 bg-paper px-2 font-mono text-[9px] text-zinc-400">
-          SYS.SRC.INIT // CATALYST_26
+      <div className="absolute inset-0 bg-blueprint-dot opacity-40 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-blueprint-grid opacity-20 z-0 pointer-events-none" />
+
+      {/* Structural blueprint frame annotations - understated and non-intrusive */}
+      <div className="absolute top-24 left-6 right-6 bottom-8 border border-brand-blue/5 rounded-lg pointer-events-none z-0 hidden lg:block">
+        <div className="absolute -top-2.5 left-6 bg-paper px-2 font-mono text-[9px] text-zinc-400/80 tracking-wider">
+          SYS.SPEC // CATALYST_26
         </div>
-        <div className="absolute -bottom-3 right-4 bg-paper px-2 font-mono text-[9px] text-zinc-400">
-          DSS.LAB // 12.9716 N, 77.5946 E
+        <div className="absolute -bottom-2.5 right-6 bg-paper px-2 font-mono text-[9px] text-zinc-400/80 tracking-wider">
+          CMRIT.HYD // 17.4399° N, 78.4983° E
         </div>
-        <div className="absolute top-1/3 -left-3 -rotate-90 bg-paper px-2 font-mono text-[9px] text-zinc-400 origin-center">
-          DIV_GRID_40x40
+        <div className="absolute top-1/3 -left-3 -rotate-90 bg-paper px-2 font-mono text-[9px] text-zinc-400/80 origin-center tracking-widest">
+          24H_HACK
         </div>
-        <div className="absolute top-2/3 -right-6 rotate-90 bg-paper px-2 font-mono text-[9px] text-zinc-400 origin-center">
-          STAGE_BUILD_01
+        <div className="absolute top-2/3 -right-5 rotate-90 bg-paper px-2 font-mono text-[9px] text-zinc-400/80 origin-center tracking-widest">
+          OCT_2026
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto w-full px-6 md:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Main Content Area */}
-        <motion.div 
-          className="lg:col-span-8 flex flex-col items-start text-left"
+      <div className="max-w-5xl mx-auto w-full px-6 md:px-12 relative z-10">
+        <motion.div
+          className="flex flex-col items-start text-left"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Tag */}
-          <motion.div 
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 border border-brand-blue/20 bg-brand-blue/[0.03] rounded-full px-3 py-1 mb-6"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" />
-            <span className="font-mono text-[10px] font-semibold text-brand-blue tracking-wider uppercase">
-              India's Premier Student Hackathon
-            </span>
+          {/* 1. Event Brand Label */}
+          <motion.div variants={itemVariants} className="mb-5 md:mb-7">
+            <div className="inline-flex items-center gap-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+              <span className="font-mono text-xs md:text-sm font-semibold text-brand-blue tracking-[0.24em] uppercase">
+                CATALYST '26
+              </span>
+            </div>
           </motion.div>
 
-          {/* Huge Title */}
-          <motion.h1 
+          {/* 2. Main Headline (Visual Focal Point) */}
+          <motion.h1
             variants={itemVariants}
-            className="font-display font-bold text-5xl md:text-8xl tracking-tight text-foreground leading-[0.95]"
+            className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[96px] xl:text-[104px] tracking-[-0.035em] text-foreground leading-[0.9] uppercase mb-7 md:mb-9"
           >
-            CATALYST <span className="text-brand-blue font-light block md:inline">'26</span>
+            <span className="block">WHERE IDEAS</span>
+            <span className="block text-foreground">MEET ACTION.</span>
           </motion.h1>
 
-          {/* Subtitle */}
-          <motion.div 
+          {/* 3. Supporting Description */}
+          <motion.p
             variants={itemVariants}
-            className="font-display font-medium text-lg md:text-2xl text-brand-blue mt-4 md:mt-6 tracking-wide"
+            className="text-zinc-600 text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed font-sans mb-10 md:mb-14"
           >
-            Where Ideas Meet Action.
-          </motion.div>
-
-          {/* Description */}
-          <motion.p 
-            variants={itemVariants}
-            className="text-zinc-500 text-sm md:text-base max-w-xl mt-6 leading-relaxed font-sans"
-          >
-            A national 24-hour hackathon bringing together developers, designers, innovators, and builders to solve meaningful real-world problems. Designed for those who code with purpose and build for impact.
+            A national 24-hour hackathon by DSS where builders turn real-world
+            problems into working solutions.
           </motion.p>
 
-          {/* Action Buttons */}
-          <motion.div 
+          {/* 4. Primary and Secondary Actions */}
+          <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-4 mt-8 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto mb-14 md:mb-18"
           >
             <a
               id="register"
-              href="#register"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-8 py-3.5 text-xs font-mono font-medium text-white bg-brand-blue rounded-md shadow-sm hover:bg-brand-blue-hover transition-all duration-300 hover:shadow-[0_4px_20px_rgba(10,68,164,0.2)] hover:-translate-y-0.5 active:scale-98"
+              href={UNSTOP_REGISTRATION_URL}
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-white bg-brand-blue rounded-xl shadow-sm hover:bg-brand-blue-hover transition-all duration-200 active:scale-[0.99] group/btn"
             >
-              Register for Catalyst
+              <span>Register Now</span>
+              <span className="inline-block transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
+                ↗
+              </span>
             </a>
+
             <a
-              href="mailto:cmritdatasciencesociety@gmail.com"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-8 py-3.5 text-xs font-mono font-medium text-zinc-700 bg-white border border-zinc-200 rounded-md hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-300 hover:-translate-y-0.5 active:scale-98"
+              href="mailto:cmritdatasciencesociety@gmail.com?subject=Sponsorship%20Inquiry%20%E2%80%94%20Catalyst%20'26"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 text-xs sm:text-sm font-mono font-medium uppercase tracking-wider text-zinc-700 hover:text-brand-blue border border-zinc-200/90 bg-white rounded-xl hover:border-brand-blue/30 transition-all shadow-xs group/btn"
             >
-              Become a Sponsor
+              <span>Become a Sponsor</span>
+              <span className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1">
+                →
+              </span>
             </a>
           </motion.div>
 
-          {/* Meta details (Date, Venue, Hours) */}
-          <motion.div 
+          {/* 5. Event Metadata & Registration Deadline */}
+          <motion.div
             variants={itemVariants}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-8 border-t border-border-subtle/80 w-full max-w-2xl"
+            className="w-full pt-10 border-t border-border-subtle/80 mb-10"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-white border border-zinc-150 rounded-lg shadow-sm text-brand-blue">
-                <Calendar size={16} />
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-x-3.5 sm:gap-x-4 gap-y-2 text-xs sm:text-[13px] font-mono tracking-wider uppercase">
+                <span className="font-bold text-zinc-900">09–10 OCTOBER 2026</span>
+                <span className="text-zinc-300 font-light select-none">/</span>
+                <span className="font-medium text-zinc-600">24 HOURS</span>
+                <span className="text-zinc-300 font-light select-none">/</span>
+                <span className="font-medium text-zinc-600">CMRIT, HYDERABAD</span>
               </div>
-              <div>
-                <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Date</div>
-                <div className="text-xs font-semibold text-zinc-700">September 25–26, 2026</div>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-white border border-zinc-150 rounded-lg shadow-sm text-brand-blue">
-                <MapPin size={16} />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Venue</div>
-                <div className="text-xs font-semibold text-zinc-700">DSS Tech Hub, India</div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-white border border-zinc-150 rounded-lg shadow-sm text-brand-blue">
-                <Clock size={16} />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Duration</div>
-                <div className="text-xs font-semibold text-zinc-700">24 Hours Live Hack</div>
+              <div className="inline-flex items-center gap-2 text-[11px] font-mono text-zinc-400 uppercase tracking-widest">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400/80" />
+                <span>REGISTRATIONS CLOSE · OCT 04</span>
               </div>
             </div>
           </motion.div>
-        </motion.div>
 
-        {/* Live Countdown Timer Area */}
-        <motion.div 
-          className="lg:col-span-4 flex flex-col justify-center items-center lg:items-end w-full"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-        >
-          <div className="w-full max-w-sm bg-white border border-border-subtle rounded-xl p-6 shadow-[0_12px_40px_rgba(0,0,0,0.03)] relative overflow-hidden group">
-            {/* Fine grid details inside the countdown card */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-blueprint-grid-fine opacity-20 border-l border-b border-brand-blue/5 rounded-bl-xl pointer-events-none" />
-            
-            <div className="flex justify-between items-center mb-6">
-              <span className="font-mono text-[10px] font-semibold text-brand-blue tracking-wider uppercase">
-                Time to Catalyst '26
-              </span>
-              <span className="font-mono text-[9px] text-zinc-400">
-                [ LIVE_COUNT ]
+          {/* 6. Restrained Engineering Countdown */}
+          <motion.div
+            variants={itemVariants}
+            className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-8 border-t border-border-subtle/50"
+          >
+            <div className="flex items-center gap-2">
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  isLive ? "bg-emerald-600 animate-pulse" : "bg-brand-blue"
+                }`}
+              />
+              <span className="font-mono text-[10.5px] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
+                {isLive ? "HACKATHON LIVE" : "COUNTDOWN TO EVENT"}
               </span>
             </div>
 
-            {/* Countdown grid */}
             {isMounted ? (
-              <div className="grid grid-cols-4 gap-2 text-center">
-                <div className="bg-zinc-50 border border-zinc-100 rounded-lg p-3 relative">
-                  <div className="font-display font-semibold text-2xl md:text-3xl text-zinc-800">
+              <div className="flex items-baseline gap-6 sm:gap-8">
+                <div className="flex flex-col items-start min-w-[44px]">
+                  <span className="font-mono text-xl sm:text-2xl font-bold text-zinc-800 tracking-tight leading-none">
                     {String(timeLeft.days).padStart(2, "0")}
-                  </div>
-                  <div className="text-[9px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Days</div>
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mt-1">
+                    DAYS
+                  </span>
                 </div>
-                <div className="bg-zinc-50 border border-zinc-100 rounded-lg p-3 relative">
-                  <div className="font-display font-semibold text-2xl md:text-3xl text-zinc-800">
+
+                <div className="flex flex-col items-start min-w-[44px]">
+                  <span className="font-mono text-xl sm:text-2xl font-bold text-zinc-800 tracking-tight leading-none">
                     {String(timeLeft.hours).padStart(2, "0")}
-                  </div>
-                  <div className="text-[9px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Hrs</div>
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mt-1">
+                    HOURS
+                  </span>
                 </div>
-                <div className="bg-zinc-50 border border-zinc-100 rounded-lg p-3 relative">
-                  <div className="font-display font-semibold text-2xl md:text-3xl text-zinc-800">
+
+                <div className="flex flex-col items-start min-w-[44px]">
+                  <span className="font-mono text-xl sm:text-2xl font-bold text-zinc-800 tracking-tight leading-none">
                     {String(timeLeft.minutes).padStart(2, "0")}
-                  </div>
-                  <div className="text-[9px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Mins</div>
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mt-1">
+                    MIN
+                  </span>
                 </div>
-                <div className="bg-zinc-50 border border-zinc-100 rounded-lg p-3 relative">
-                  <div className="font-display font-semibold text-2xl md:text-3xl text-brand-blue">
+
+                <div className="flex flex-col items-start min-w-[44px]">
+                  <span className="font-mono text-xl sm:text-2xl font-bold text-brand-blue tracking-tight leading-none">
                     {String(timeLeft.seconds).padStart(2, "0")}
-                  </div>
-                  <div className="text-[9px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Secs</div>
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-brand-blue/70 mt-1">
+                    SEC
+                  </span>
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-4 gap-2 text-center opacity-50">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="bg-zinc-50 border border-zinc-100 rounded-lg p-3">
-                    <div className="font-display font-semibold text-2xl text-zinc-800">00</div>
-                    <div className="text-[9px] font-mono text-zinc-400 uppercase mt-1">...</div>
+              <div className="flex items-baseline gap-6 sm:gap-8 opacity-40">
+                {["DAYS", "HOURS", "MIN", "SEC"].map((unit) => (
+                  <div key={unit} className="flex flex-col items-start min-w-[44px]">
+                    <span className="font-mono text-xl sm:text-2xl font-bold text-zinc-800 tracking-tight leading-none">
+                      00
+                    </span>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mt-1">
+                      {unit}
+                    </span>
                   </div>
                 ))}
               </div>
             )}
-
-            <div className="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs">
-              <span className="text-zinc-500 font-sans">Applications close soon.</span>
-              <a href="#register" className="font-mono text-brand-blue hover:text-brand-blue-hover font-semibold inline-flex items-center gap-1 group/link">
-                Apply now
-                <ArrowUpRight size={14} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-              </a>
-            </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
   );
 }
+
+

@@ -1,175 +1,198 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-const timelineSteps = [
+// Official 7 stages of CATALYST '26 (easily updatable as dates evolve)
+const timelineStages = [
   {
-    id: "01",
-    phase: "Registration Starts",
-    date: "Aug 1, 2026",
-    status: "Active",
-    description: "National registration portal opens. Teams register and begin drafting submissions.",
+    number: "01",
+    title: "REGISTRATION",
+    date: "Opening Date · Announcing Soon",
+    description:
+      "National portal opens on Unstop. Team registration and ideation begin.",
+    isPrimary: false,
   },
   {
-    id: "02",
-    phase: "Submission Deadline",
-    date: "Aug 31, 2026",
-    status: "Upcoming",
-    description: "Final deadline for registration and team project idea submission.",
+    number: "02",
+    title: "REGISTRATION CLOSES",
+    date: "October 04, 2026",
+    description: "Final deadline to complete team registration on Unstop.",
+    isPrimary: false,
   },
   {
-    id: "03",
-    phase: "Cohorts Announced",
-    date: "Sep 5, 2026",
-    status: "Upcoming",
-    description: "Vetting completed. Shortlisted teams receive official physical invitations.",
+    number: "03",
+    title: "SHORTLISTING",
+    date: "Provisional Review",
+    description:
+      "Teams may be shortlisted if registrations exceed available capacity.",
+    isPrimary: false,
   },
   {
-    id: "04",
-    phase: "Hackathon Starts",
-    date: "Sep 25, 09:00 AM",
-    status: "Upcoming",
-    description: "Offline event starts at DSS Tech Hub. 24-hour hack countdown begins.",
+    number: "04",
+    title: "CATALYST '26",
+    date: "October 09–10, 2026",
+    description: "24 Hours · CMRIT, Hyderabad",
+    isPrimary: true,
   },
   {
-    id: "05",
-    phase: "Project Lock",
-    date: "Sep 26, 09:00 AM",
-    status: "Upcoming",
-    description: "Repository lock. Codebases frozen, final product details submitted.",
+    number: "05",
+    title: "PROJECT SUBMISSION",
+    date: "Hour 24 · Hack Freeze",
+    description: "Build → Test → Submit",
+    isPrimary: false,
   },
   {
-    id: "06",
-    phase: "Live Demos",
-    date: "Sep 26, 11:00 AM",
-    status: "Upcoming",
-    description: "Live prototype demonstration and presentations before technical judges.",
+    number: "06",
+    title: "JUDGING",
+    date: "Evaluation Round",
+    description: "Project evaluation and presentations.",
+    isPrimary: false,
   },
   {
-    id: "07",
-    phase: "Closing & Awards",
-    date: "Sep 26, 03:00 PM",
-    status: "Upcoming",
-    description: "Closing ceremony. Awards distributed and team achievements celebrated.",
+    number: "07",
+    title: "AWARDS",
+    date: "Closing Ceremony",
+    description: "Winners announced.",
+    isPrimary: false,
   },
 ];
 
 export default function Timeline() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      },
+    },
+  };
+
   return (
-    <section id="timeline" className="py-24 md:py-32 relative overflow-hidden bg-base-bg border-b border-border-subtle/50">
+    <section
+      id="timeline"
+      className="py-28 md:py-36 lg:py-40 relative overflow-hidden bg-paper border-b border-border-subtle/60"
+    >
+      {/* Subtle blueprint grid overlay */}
       <div className="absolute inset-0 bg-blueprint-dot opacity-40 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-blueprint-grid opacity-20 z-0 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
         {/* Section Header */}
-        <div className="mb-20 max-w-3xl">
-          <div className="font-mono text-xs font-semibold text-brand-blue uppercase tracking-widest mb-3">
-            04 // EVENT ROADMAP
+        <div className="max-w-3xl mb-16 md:mb-24">
+          <div className="inline-flex items-center gap-2 mb-5 md:mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+            <span className="font-mono text-xs md:text-sm font-semibold text-brand-blue tracking-[0.22em] uppercase">
+              TIMELINE
+            </span>
           </div>
-          <h2 className="font-display font-bold text-3xl md:text-5xl text-zinc-900 tracking-tight leading-tight">
-            A structured timeline engineered for action.
+
+          <h2 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-[-0.035em] text-foreground leading-[0.92] uppercase mb-6 sm:mb-8">
+            THE ROAD TO CATALYST
           </h2>
-          <div className="w-16 h-[2px] bg-brand-blue mt-6" />
+
+          <p className="text-zinc-600 text-base sm:text-lg md:text-xl leading-relaxed font-sans max-w-2xl">
+            From registration to the final build — every stage moves you closer
+            to turning an idea into something real.
+          </p>
         </div>
 
-        {/* Desktop Horizontal Timeline */}
-        <div className="hidden lg:block relative mt-24 pb-12">
-          {/* Main Horizontal Progress Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-zinc-200 -translate-y-1/2 z-0" />
-          <motion.div 
-            className="absolute top-1/2 left-0 h-[2px] bg-brand-blue -translate-y-1/2 z-0"
+        {/* Desktop Horizontal Blueprint Timeline */}
+        <div className="hidden lg:block relative mt-16 pb-8">
+          {/* Background Blueprint Connecting Guide Line */}
+          <div className="absolute top-[126px] left-10 right-10 h-[1.5px] bg-border-subtle z-0" />
+          <motion.div
+            className="absolute top-[126px] left-10 h-[1.5px] bg-brand-blue z-0"
             initial={{ width: "0%" }}
-            whileInView={{ width: "15%" }} // Active up to registration phase
+            whileInView={{ width: "calc(100% - 80px)" }}
             viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           />
 
-          {/* Timeline Nodes Grid */}
-          <div className="grid grid-cols-7 gap-4 relative z-10">
-            {timelineSteps.map((step, idx) => {
-              const isActive = step.status === "Active";
+          {/* 7 Horizontal Stations */}
+          <div className="grid grid-cols-7 gap-3 relative z-10">
+            {timelineStages.map((stage, idx) => {
+              const isHovered = hoveredIndex === idx;
+
               return (
-                <div key={step.id} className="flex flex-col items-center text-center">
-                  
-                  {/* Phase ID & Name (Top) */}
-                  <div className="h-20 flex flex-col justify-end pb-4">
-                    <span className="font-mono text-[9px] text-zinc-400 font-semibold mb-1">
-                      [{step.id} // PHASE]
+                <div
+                  key={stage.number}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="group flex flex-col items-center text-center cursor-default"
+                >
+                  {/* Top: Stage Tag & Name */}
+                  <div className="h-24 flex flex-col justify-end pb-3 px-1">
+                    <span className="font-mono text-[9px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-brand-blue transition-colors">
+                      [ {stage.number} // STAGE ]
                     </span>
-                    <span className={`font-display font-bold text-sm leading-tight ${isActive ? "text-brand-blue" : "text-zinc-700"}`}>
-                      {step.phase}
+                    <span
+                      className={`font-display font-bold text-xs xl:text-[13px] leading-tight transition-colors ${
+                        stage.isPrimary
+                          ? "text-brand-blue"
+                          : isHovered
+                          ? "text-foreground"
+                          : "text-zinc-800"
+                      }`}
+                    >
+                      {stage.title}
                     </span>
                   </div>
 
-                  {/* Connecting Node */}
-                  <div className="relative my-4 flex items-center justify-center">
+                  {/* Center Node on Connecting Line */}
+                  <div className="h-10 flex items-center justify-center relative my-1">
                     <motion.div
-                      className={`w-6 h-6 rounded-full border-2 flex items-center justify-center bg-white z-10 ${
-                        isActive 
-                          ? "border-brand-blue shadow-[0_0_12px_rgba(10,68,164,0.3)]" 
-                          : "border-zinc-300"
+                      animate={{
+                        scale: isHovered ? 1.15 : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className={`rounded-full flex items-center justify-center z-10 transition-all ${
+                        stage.isPrimary
+                          ? "w-9 h-9 border-2 border-brand-blue bg-white shadow-[0_0_0_4px_rgba(10,68,164,0.1)]"
+                          : "w-7 h-7 border border-border-subtle bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] group-hover:border-brand-blue/60"
                       }`}
-                      whileHover={{ scale: 1.15 }}
                     >
-                      <div className={`w-2.5 h-2.5 rounded-full ${isActive ? "bg-brand-blue animate-pulse" : "bg-zinc-200"}`} />
+                      <span
+                        className={`font-mono text-[10.5px] font-bold ${
+                          stage.isPrimary
+                            ? "text-brand-blue"
+                            : "text-zinc-500 group-hover:text-brand-blue"
+                        }`}
+                      >
+                        {stage.number}
+                      </span>
                     </motion.div>
                   </div>
 
-                  {/* Details (Bottom) */}
-                  <div className="pt-4 px-2">
-                    <span className={`font-mono text-[10px] font-bold block mb-2 ${isActive ? "text-brand-blue" : "text-zinc-500"}`}>
-                      {step.date}
+                  {/* Bottom: Date & Short Description */}
+                  <div className="pt-3 px-1 flex flex-col items-center">
+                    <span
+                      className={`font-mono text-[10.5px] uppercase tracking-wider block mb-1.5 ${
+                        stage.isPrimary
+                          ? "font-bold text-brand-blue"
+                          : "font-semibold text-zinc-800"
+                      }`}
+                    >
+                      {stage.date}
                     </span>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed font-sans max-w-[150px] mx-auto">
-                      {step.description}
-                    </p>
-                  </div>
-
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Vertical Timeline */}
-        <div className="block lg:hidden relative mt-12 pl-6">
-          {/* Vertical progress line */}
-          <div className="absolute top-2 bottom-2 left-[11px] w-[2px] bg-zinc-200 z-0" />
-          <div className="absolute top-2 left-[11px] w-[2px] h-[15%] bg-brand-blue z-0" />
-
-          <div className="flex flex-col gap-10">
-            {timelineSteps.map((step) => {
-              const isActive = step.status === "Active";
-              return (
-                <div key={step.id} className="relative flex items-start gap-4">
-                  {/* Indicator Dot */}
-                  <div className="absolute left-[-21px] top-1.5 w-6 h-6 rounded-full border-2 border-zinc-300 flex items-center justify-center bg-white z-10">
-                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-250" />
-                  </div>
-                  {isActive && (
-                    <div className="absolute left-[-21px] top-1.5 w-6 h-6 rounded-full border-2 border-brand-blue flex items-center justify-center bg-white z-10 shadow-[0_0_10px_rgba(10,68,164,0.2)]">
-                      <div className="w-2.5 h-2.5 rounded-full bg-brand-blue animate-pulse" />
-                    </div>
-                  )}
-
-                  {/* Content card */}
-                  <div className="flex-1 bg-white border border-border-subtle rounded-lg p-5 shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-mono text-[9px] text-zinc-400 font-semibold">
-                        [{step.id} // PHASE]
-                      </span>
-                      <span className={`font-mono text-[9px] font-bold px-2 py-0.5 rounded ${
-                        isActive ? "bg-brand-blue-light text-brand-blue" : "bg-zinc-50 text-zinc-500"
-                      }`}>
-                        {step.date}
-                      </span>
-                    </div>
-                    <h3 className={`font-display font-semibold text-sm ${isActive ? "text-brand-blue" : "text-zinc-800"}`}>
-                      {step.phase}
-                    </h3>
-                    <p className="text-zinc-400 text-xs leading-relaxed font-sans mt-2">
-                      {step.description}
+                    <p className="text-zinc-500 text-[11px] leading-relaxed font-sans max-w-[155px]">
+                      {stage.description}
                     </p>
                   </div>
                 </div>
@@ -178,7 +201,82 @@ export default function Timeline() {
           </div>
         </div>
 
+        {/* Mobile Vertical Recomposition */}
+        <div className="block lg:hidden relative mt-12 pl-8">
+          {/* Continuous Vertical Blue Guide Line */}
+          <div className="absolute top-4 bottom-4 left-[14px] w-[1.5px] bg-brand-blue/30 z-0" />
+
+          <motion.div
+            className="flex flex-col gap-10"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+          >
+            {timelineStages.map((stage) => (
+              <motion.div
+                key={stage.number}
+                variants={itemVariants}
+                className="relative flex items-start"
+              >
+                {/* Node on Vertical Line */}
+                <div
+                  className={`absolute -left-[27px] top-0.5 rounded-full flex items-center justify-center bg-white z-10 ${
+                    stage.isPrimary
+                      ? "w-8 h-8 border-2 border-brand-blue shadow-[0_0_0_3px_rgba(10,68,164,0.12)]"
+                      : "w-6 h-6 border border-border-subtle shadow-sm"
+                  }`}
+                >
+                  <span
+                    className={`font-mono text-[10px] font-bold ${
+                      stage.isPrimary ? "text-brand-blue" : "text-zinc-500"
+                    }`}
+                  >
+                    {stage.number}
+                  </span>
+                </div>
+
+                {/* Content Details */}
+                <div
+                  className={`flex-1 pl-4 pt-0.5 ${
+                    stage.isPrimary
+                      ? "p-4 rounded-md border border-brand-blue/30 bg-brand-blue/[0.02]"
+                      : ""
+                  }`}
+                >
+                  <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+                    <span className="font-mono text-[9.5px] font-semibold text-zinc-400 uppercase tracking-widest">
+                      STAGE_{stage.number}
+                    </span>
+                    <span
+                      className={`font-mono text-[10px] uppercase tracking-wider ${
+                        stage.isPrimary
+                          ? "font-bold text-brand-blue"
+                          : "font-semibold text-zinc-700"
+                      }`}
+                    >
+                      {stage.date}
+                    </span>
+                  </div>
+
+                  <h3
+                    className={`font-display font-bold text-base sm:text-lg tracking-tight mb-1.5 ${
+                      stage.isPrimary ? "text-brand-blue" : "text-zinc-900"
+                    }`}
+                  >
+                    {stage.title}
+                  </h3>
+
+                  <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed font-sans">
+                    {stage.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+
